@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct AlertAction {
+public struct AlertAction {
     var title: String = "okayButtonTitle"
     var action: (() -> Void)
 }
 
-struct CustomAlert {
+public struct CustomAlert {
     let id = UUID()
     var message: String = ""
     var buttonTitle: String = ""

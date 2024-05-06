@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class AlertManager: ObservableObject {
+public class AlertManager: ObservableObject {
     @Published var alerts = [CustomAlert]()
     
     func displayAlert(_ alert: CustomAlert) {

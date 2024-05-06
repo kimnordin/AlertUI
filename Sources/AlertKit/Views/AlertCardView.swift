@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct AlertCardView: View {
+public struct AlertCardView: View {
     @ObservedObject var manager: AlertManager
     var alert: CustomAlert
     
-    var body: some View {
+    public var body: some View {
         Button(role: .cancel, action: {
             manager.dismissAlert(alert)
         }, label: {

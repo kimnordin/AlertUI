@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension View {
+public extension View {
     func observeAlerts(on queues: [String]) -> some View {
         self.modifier(AlertViewModifier(queues: queues))
     }
