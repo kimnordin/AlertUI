@@ -15,28 +15,12 @@ public class AlertManager: ObservableObject {
     }
     
     /**
-     Adds an alert to the `alerts` stack.
+     Adds an alert to the `alerts` stack, displaying it.
      - parameter alert: The `CustomAlert` to add.
-     - parameter displayed: Whether the alert should be displayed immediately. Is `true` by default.
-     */
-    public func addAlert(_ alert: CustomAlert, displayed: Bool = true) {
-        DispatchQueue.main.async { [self] in
-            alerts.append(alert)
-            if displayed {
-                displayAlert(alert)
-            }
-        }
-    }
-    
-    /**
-     Displays an alert from the `alerts` stack.
-     - parameter alert: The `CustomAlert` to display.
      */
     public func displayAlert(_ alert: CustomAlert) {
         DispatchQueue.main.async { [self] in
-            if let index = alerts.firstIndex(where: { $0.id == alert.id }) {
-                alerts[index].displayed = true
-            }
+            alerts.append(alert)
         }
     }
     

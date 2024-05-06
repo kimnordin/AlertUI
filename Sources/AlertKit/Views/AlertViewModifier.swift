@@ -14,7 +14,7 @@ struct AlertViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .overlay(Group {
-                if let alert = alertManager.alerts.first(where: { queues.contains($0.queue) }), alert.displayed {
+                if let alert = alertManager.alerts.first(where: { queues.contains($0.queue) }) {
                     AlertCardView(manager: alertManager, alert: alert)
                 }
             })
