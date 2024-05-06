@@ -1,6 +1,6 @@
 //
 //  AlertKitError.swift
-//
+//  AlertKit
 //
 //  Created by Kim Nordin on 2024-05-06.
 //
