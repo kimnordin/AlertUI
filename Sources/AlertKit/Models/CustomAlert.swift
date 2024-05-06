@@ -18,4 +18,11 @@ public struct CustomAlert {
     var buttonTitle: String = ""
     var alertAction: AlertAction?
     var queue: String = "main"
+    
+    public init(message: String = "", buttonTitle: String = "", alertAction: AlertAction? = nil, queue: String = "main") {
+        self.message = message
+        self.buttonTitle = buttonTitle
+        self.alertAction = alertAction
+        self.queue = queue
+    }
 }
