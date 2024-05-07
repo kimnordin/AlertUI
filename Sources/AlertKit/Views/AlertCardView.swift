@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct AlertCardView: View {
     @ObservedObject var manager: AlertManager
-    var alert: CustomAlert
+    var alert: Alert
 
     public var body: some View {
         VStack(spacing: 10) {
@@ -21,32 +21,43 @@ public struct AlertCardView: View {
                 .lineLimit(3)
                 .multilineTextAlignment(.center)
             HStack(alignment: .center) {
-                Button(role: .cancel, action: {
-                    manager.dismissAlert(alert)
-                }, label: {
-                    Text(alert.buttonTitle)
+                Spacer()
+                let primaryAction = alert.primaryAction
+                Button {
+                    primaryAction.action?()
+                    if primaryAction.shouldDismiss {
+                        manager.dismissAlert(alert)
+                    }
+                } label: {
+                    Text(primaryAction.title)
                         .lineLimit(2)
                         .multilineTextAlignment(.center)
-                })
-                if let alertAction = alert.alertAction {
-                    Button(role: .destructive, action: {
-                        alertAction.action()
-                    }, label: {
-                        Text(alertAction.title)
+                }
+                Spacer()
+                if let secondaryAction = alert.secondaryAction {
+                    Button {
+                        secondaryAction.action?()
+                        if secondaryAction.shouldDismiss {
+                            manager.dismissAlert(alert)
+                        }
+                    } label: {
+                        Text(secondaryAction.title)
                             .lineLimit(2)
                             .multilineTextAlignment(.center)
-                    })
+                    }
+                    Spacer()
                 }
             }
         }
         .padding()
-        .frame(minWidth: 150, maxWidth: .infinity, minHeight: 50)
+        .frame(maxWidth: .infinity)
         .background(Color.green)
         .cornerRadius(10)
+        .padding()
     }
 }
 struct AlertCardView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertCardView(manager: AlertManager(), alert: CustomAlert(title: "Alert Title", message: "Longer Descriptive Alert Message", buttonTitle: "Okay"))
+        AlertCardView(manager: AlertManager(), alert: Alert(title: "Alert Title", message: "Longer Descriptive Alert Message"))
     }
 }

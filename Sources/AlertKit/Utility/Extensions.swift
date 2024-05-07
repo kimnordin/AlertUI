@@ -8,7 +8,7 @@
 import SwiftUI
 
 public extension View {
-    func observeAlerts(on queues: [String]) -> some View {
-        self.modifier(AlertViewModifier(queues: queues))
+    func observeAlerts(on queues: [String], appearance: AlertAppearance = .default) -> some View {
+        self.modifier(AlertViewModifier(queues: queues, appearance: appearance))
     }
 }

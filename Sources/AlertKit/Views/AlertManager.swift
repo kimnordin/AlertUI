@@ -8,17 +8,17 @@
 import SwiftUI
 
 public class AlertManager: ObservableObject {
-    @Published var alerts = [CustomAlert]()
+    @Published var alerts = [Alert]()
     
-    public init(alerts: [CustomAlert] = []) {
+    public init(alerts: [Alert] = []) {
         self.alerts = alerts
     }
     
     /**
      Adds an alert to the `alerts` stack, displaying it.
-     - parameter alert: The `CustomAlert` to add.
+     - parameter alert: The `Alert` to add.
      */
-    public func displayAlert(_ alert: CustomAlert) {
+    public func displayAlert(_ alert: Alert) {
         DispatchQueue.main.async { [self] in
             alerts.append(alert)
         }
@@ -26,11 +26,11 @@ public class AlertManager: ObservableObject {
     
     /**
      Dismiss an alert from the `alerts` stack.
-     - parameter alert: An optional `CustomAlert` to dismiss.
+     - parameter alert: An optional `Alert` to dismiss.
      
-     If no `CustomAlert` was specified, the first alert in the stack will be dismissed.
+     If no `Alert` was specified, the first alert in the stack will be dismissed.
      */
-    public func dismissAlert(_ alert: CustomAlert? = nil) {
+    public func dismissAlert(_ alert: Alert? = nil) {
         DispatchQueue.main.async { [self] in
             if let alert = alert, let index = alerts.firstIndex(where: { $0.id == alert.id }) {
                 alerts.remove(at: index)
