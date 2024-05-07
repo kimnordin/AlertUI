@@ -1,6 +1,6 @@
 //
 //  AlertView.swift
-//  AlertKit
+//  AlertUI
 //
 //  Created by Kim Nordin on 2024-05-06.
 //

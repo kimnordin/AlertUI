@@ -1,7 +1,7 @@
 import XCTest
-@testable import AlertKit
+@testable import AlertUI
 
-final class AlertKitTests: XCTestCase {
+final class AlertUITests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

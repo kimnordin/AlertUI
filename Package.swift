@@ -3,21 +3,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "AlertKit",
+    name: "AlertUI",
     platforms: [
         .macOS(.v11),
         .iOS(.v15)
     ],
     products: [
         .library(
-            name: "AlertKit",
-            targets: ["AlertKit"]),
+            name: "AlertUI",
+            targets: ["AlertUI"]),
     ],
     targets: [
         .target(
-            name: "AlertKit"),
+            name: "AlertUI"),
         .testTarget(
-            name: "AlertKitTests",
-            dependencies: ["AlertKit"]),
+            name: "AlertUITests",
+            dependencies: ["AlertUI"]),
     ]
 )
