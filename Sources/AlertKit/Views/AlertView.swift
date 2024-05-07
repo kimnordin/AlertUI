@@ -1,5 +1,5 @@
 //
-//  AlertCardView.swift
+//  AlertView.swift
 //  AlertKit
 //
 //  Created by Kim Nordin on 2024-05-06.
@@ -7,9 +7,14 @@
 
 import SwiftUI
 
-public struct AlertCardView: View {
-    @ObservedObject var manager: AlertManager
-    var alert: Alert
+public struct AlertView: View {
+    @ObservedObject var alertManager: AlertManager
+    public var alert: Alert
+    
+    init(_ alertManager: AlertManager, alert: Alert) {
+        self.alertManager = alertManager
+        self.alert = alert
+    }
 
     public var body: some View {
         VStack(spacing: 10) {
@@ -17,16 +22,18 @@ public struct AlertCardView: View {
                 .bold()
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
-            Text(alert.message)
-                .lineLimit(3)
-                .multilineTextAlignment(.center)
+            if let alertMessage = alert.message {
+                Text(alertMessage)
+                    .lineLimit(3)
+                    .multilineTextAlignment(.center)
+            }
             HStack(alignment: .center) {
                 Spacer()
                 let primaryAction = alert.primaryAction
                 Button {
                     primaryAction.action?()
                     if primaryAction.shouldDismiss {
-                        manager.dismissAlert(alert)
+                        alertManager.dismiss(alert)
                     }
                 } label: {
                     Text(primaryAction.title)
@@ -38,7 +45,7 @@ public struct AlertCardView: View {
                     Button {
                         secondaryAction.action?()
                         if secondaryAction.shouldDismiss {
-                            manager.dismissAlert(alert)
+                            alertManager.dismiss(alert)
                         }
                     } label: {
                         Text(secondaryAction.title)
@@ -50,14 +57,11 @@ public struct AlertCardView: View {
             }
         }
         .padding()
-        .frame(maxWidth: .infinity)
-        .background(Color.green)
-        .cornerRadius(10)
-        .padding()
     }
 }
-struct AlertCardView_Previews: PreviewProvider {
+struct AlertView_Previews: PreviewProvider {
     static var previews: some View {
-        AlertCardView(manager: AlertManager(), alert: Alert(title: "Alert Title", message: "Longer Descriptive Alert Message"))
+        AlertView(AlertManager(), alert: Alert(title: "Alert Title", message: "Longer Descriptive Alert Message"))
+            .environmentObject(AlertManager())
     }
 }

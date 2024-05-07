@@ -18,7 +18,7 @@ public class AlertManager: ObservableObject {
      Adds an alert to the `alerts` stack, displaying it.
      - parameter alert: The `Alert` to add.
      */
-    public func displayAlert(_ alert: Alert) {
+    public func display(_ alert: Alert) {
         DispatchQueue.main.async { [self] in
             alerts.append(alert)
         }
@@ -30,7 +30,7 @@ public class AlertManager: ObservableObject {
      
      If no `Alert` was specified, the first alert in the stack will be dismissed.
      */
-    public func dismissAlert(_ alert: Alert? = nil) {
+    public func dismiss(_ alert: Alert? = nil) {
         DispatchQueue.main.async { [self] in
             if let alert = alert, let index = alerts.firstIndex(where: { $0.id == alert.id }) {
                 alerts.remove(at: index)
