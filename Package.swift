@@ -6,7 +6,7 @@ let package = Package(
     name: "AlertUI",
     platforms: [
         .macOS(.v11),
-        .iOS(.v15)
+        .iOS(.v13)
     ],
     products: [
         .library(
