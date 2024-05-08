@@ -17,15 +17,15 @@ dependencies: [
 Implement the AlertManager in your App to manage alerts:
 
 ```swift
-import AlertUI // Import AlertUI
+import AlertUI
 
 @main struct MyApp: App {
-    @StateObject private var alertManager = AlertManager() // Add AlertManager
+    @StateObject private var alertManager = AlertManager() 
     
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environmentObject(alertManager) // Provide AlertManager to the environment
+                .environmentObject(alertManager)
         }
     }
 }
@@ -37,11 +37,11 @@ Add the AlertContainer view where you want your alerts to appear:
 
 ```swift
 struct MainView: View {
-    @EnvironmentObject private var alertManager: AlertManager // Observe AlertManager changes
+    @EnvironmentObject private var alertManager: AlertManager
     
     var body: some View {
         VStack {
-            AlertContainer() // Implement AlertContainer to display Alerts
+            AlertContainer()
         }
     }
 }
@@ -65,5 +65,43 @@ Trigger alerts through the AlertManager:
 ```swift
 Button("Show Alert") {
     alertManager.display(Alert(title: "Hello", message: "I'm an Alert!"))
+}
+```
+
+### Example Implementation
+```swift
+import SwiftUI
+import AlertUI
+
+@main struct MyApp: App {
+    @StateObject private var alertManager = AlertManager()
+    
+    var body: some Scene {
+        WindowGroup {
+            MainView()
+                .environmentObject(alertManager)
+        }
+    }
+}
+
+struct MainView: View {
+    @EnvironmentObject private var alertManager: AlertManager
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            AlertContainer { alert in
+                alert
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .padding()
+            }
+            VStack {
+                Button("Show Alert") {
+                    alertManager.display(Alert(title: "Hello", message: "I'm an Alert!"))
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
 }
 ```
