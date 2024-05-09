@@ -86,14 +86,22 @@ public struct AlertContainer<Content: View>: View {
 
     public var body: some View {
         let filteredAlerts = alertManager.alerts.filter { queues.contains($0.queue) }
+        if filteredAlerts.isEmpty {
+            EmptyView()
+        } else {
+            AlertContainerView(alerts: filteredAlerts)
+        }
+    }
+    
+    @ViewBuilder private func AlertContainerView(alerts: [Alert]) -> some View {
         switch appearance {
         case .´default´:
-            if let alert = filteredAlerts.last {
+            if let alert = alerts.last {
                 AlertViewContent(content, alert: alert)
             }
         case .list:
             VStack {
-                ForEach(filteredAlerts) { alert in
+                ForEach(alerts) { alert in
                     AlertViewContent(content, alert: alert)
                 }
             }
