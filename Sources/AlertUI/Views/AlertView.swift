@@ -30,12 +30,12 @@ public struct AlertView: View {
 
     public var body: some View {
         VStack(spacing: 10) {
-            Text(alert.title)
+            Text(.init(alert.title))
                 .bold()
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
             if let alertMessage = alert.message {
-                Text(alertMessage)
+                Text(.init(alertMessage))
                     .lineLimit(3)
                     .multilineTextAlignment(.center)
             }
@@ -48,7 +48,7 @@ public struct AlertView: View {
                         alertManager.dismiss(alert)
                     }
                 } label: {
-                    Text(primaryAction.title)
+                    Text(.init(primaryAction.title))
                         .lineLimit(2)
                         .multilineTextAlignment(.center)
                 }
@@ -60,7 +60,7 @@ public struct AlertView: View {
                             alertManager.dismiss(alert)
                         }
                     } label: {
-                        Text(secondaryAction.title)
+                        Text(.init(secondaryAction.title))
                             .lineLimit(2)
                             .multilineTextAlignment(.center)
                     }
