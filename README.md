@@ -88,19 +88,16 @@ struct MainView: View {
     @EnvironmentObject private var alertManager: AlertManager
     
     var body: some View {
-        ZStack(alignment: .bottom) {
+        ZStack {
+            Button("Show Alert") {
+                alertManager.display(Alert(title: "Hello", message: "I'm an Alert!"))
+            }
             AlertContainer { alert in
                 alert
-                    .background(Color.blue)
+                    .background(.red)
                     .cornerRadius(10)
                     .padding()
             }
-            VStack {
-                Button("Show Alert") {
-                    alertManager.display(Alert(title: "Hello", message: "I'm an Alert!"))
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
