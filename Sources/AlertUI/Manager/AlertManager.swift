@@ -7,9 +7,19 @@
 
 import SwiftUI
 
+/**
+ ## Alert Manager
+ 
+ Manages and displays `Alert`'s.
+ */
 public class AlertManager: ObservableObject {
+    /// The displayed `Alert`'s.
     @Published var alerts = [Alert]()
     
+    /**
+     Initializes an `AlertManager` with initial `Alert`'s.
+     - parameter alerts: The initial `Alert`'s to be added to the `AlertManager`.
+     */
     public init(alerts: [Alert] = []) {
         self.alerts = alerts
     }
