@@ -14,7 +14,7 @@ import SwiftUI
  */
 public class AlertManager: ObservableObject {
     /// The displayed `Alert`'s.
-    @Published var alerts = [Alert]()
+    @Published public var alerts = [Alert]()
     
     /**
      Initializes an `AlertManager` with initial `Alert`'s.
