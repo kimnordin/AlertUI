@@ -44,7 +44,7 @@ public class AlertManager: ObservableObject {
         DispatchQueue.main.async { [self] in
             if let alert = alert, let index = alerts.firstIndex(where: { $0.id == alert.id }) {
                 alerts.remove(at: index)
-            } else {
+            } else if !alerts.isEmpty {
                 alerts.removeFirst()
             }
         }
