@@ -29,8 +29,9 @@ public class AlertManager: ObservableObject {
      - parameter alert: The `Alert` to add.
      */
     public func display(_ alert: Alert) {
-        DispatchQueue.main.async { [self] in
-            alerts.append(alert)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.alerts.append(alert)
         }
     }
     
@@ -41,11 +42,13 @@ public class AlertManager: ObservableObject {
      If no `Alert` was specified, the first alert in the stack will be dismissed.
      */
     public func dismiss(_ alert: Alert? = nil) {
-        DispatchQueue.main.async { [self] in
-            if let alert = alert, let index = alerts.firstIndex(where: { $0.id == alert.id }) {
-                alerts.remove(at: index)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            if let alert = alert, let index = self.alerts.firstIndex(where: { $0.id == alert.id }) {
+                self.alerts.remove(at: index)
             } else if !alerts.isEmpty {
-                alerts.removeFirst()
+                self.alerts.removeFirst()
             }
         }
     }
